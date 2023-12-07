@@ -1,14 +1,17 @@
-# Authenticate Go apps to Redis on AWS using IAM
+# Using IAM authentication for Redis on AWS
 
-You can use this package to authenticate your Go apps to Amazon MemoryDB (and Amazon ElastiCache) for Redis using AWS IAM. Example below
+You can use this package to authenticate your Go apps to Amazon MemoryDB (and Amazon ElastiCache) for Redis using AWS IAM. 
 
-> For more info, refer to this blog post.
+![](https://community.aws/_next/image?url=https%3A%2F%2Fassets.community.aws%2Fa%2F2ZCVX81lcmA658o2P05GmRPjRCU.jpeg%3FimgSize%3D918x370&w=1920&q=75)
+
+Here is an example:
 
 ```go
 package main
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 	"log"
 
@@ -18,10 +21,11 @@ import (
 
 func main() {
 
-    serviceName := "memorydb" // or "elasticache"
-    clusterName := "name of cluster"
-    username := "iam user name"
-    region := "aws region"
+	serviceName := "memorydb" // or "elasticache"
+	clusterName := "name of cluster"
+	username := "iam user name"
+	region := "aws region"
+	clusterEndpoint := "cluster endpoint" // memorydb or elasticache endpoint
 
 	generator, err := auth.New(serviceName, clusterName, username, region)
 	if err != nil {
@@ -59,4 +63,4 @@ func main() {
 }
 ```
 
-
+For a deep-dive, refer to [this blog post](https://community.aws/content/2ZCKrwaaaTglCCWISSaKv1d7bI3/using-iam-authentication-for-redis-on-aws).
